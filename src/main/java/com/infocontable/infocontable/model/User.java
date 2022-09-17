@@ -32,7 +32,7 @@ public class User {
     @Column(nullable = false)
     private String empresa;
 
-    @Column()
+    @Column
     private String codigo_auth;
 
     @OneToMany

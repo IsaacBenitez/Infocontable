@@ -39,7 +39,7 @@ public class ReporteContable {
     private String nombre_tercero;
 
     @ManyToOne
-    @JoinColumn(name = "user_nit")
+    @JoinColumn(name = "nit")
     private User user;
 
 
