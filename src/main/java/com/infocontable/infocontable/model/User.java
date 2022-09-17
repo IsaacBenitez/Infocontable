@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "TBL_USER")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,8 +16,9 @@ import java.util.List;
 @EqualsAndHashCode
 public class User {
 
+
     @Id
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String nit;
 
     @Column(nullable = false)
@@ -32,7 +33,7 @@ public class User {
     @Column(nullable = false)
     private String empresa;
 
-    @Column()
+    @Column
     private String codigo_auth;
 
     @OneToMany

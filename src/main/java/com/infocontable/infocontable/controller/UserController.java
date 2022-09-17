@@ -9,14 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/usuarios")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("clientes")
+    @GetMapping("listar")
     public List<User> listarUsuarios(){
         return userService.getUsersList();
     }
