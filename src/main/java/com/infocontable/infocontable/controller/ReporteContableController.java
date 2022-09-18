@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/reportes")
+@RequestMapping("/api/reportes")
 public class ReporteContableController {
 
     @Autowired
@@ -35,5 +35,9 @@ public class ReporteContableController {
         reporteContableService.deleteReporteContable(reporteContableId);
     }
 
-    // TODO: CREAR EL ENDPOINT DE ACTUALIZAR REPORTE CONTABLE
+    @PutMapping
+    public void editarReporteContable(@RequestBody ReporteContable reporteContable){
+        reporteContableService.updateReporteContable(reporteContable);
+    }
+    // TODO: PROBAR EL ENDPOINT DE EDITAR REPORTE CONTABLE
 }

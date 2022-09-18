@@ -1,11 +1,12 @@
 package com.infocontable.infocontable.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
-@Table(name = "TBL_REPORTECONTABLE")
+@Table(name = "reportescontables")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -30,7 +31,7 @@ public class ReporteContable {
     private String descripcion;
 
     @Column
-    private Date fecha;
+    private LocalDate fecha;
 
     @Column
     private String comentarios;
@@ -39,7 +40,7 @@ public class ReporteContable {
     private String nombre_tercero;
 
     @ManyToOne
-    @JoinColumn(name = "nit")
+    @JoinColumn(name = "user_nit")
     private User user;
 
 

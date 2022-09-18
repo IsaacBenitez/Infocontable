@@ -9,35 +9,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/usuarios")
+@RequestMapping("/api/usuarios")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("listar")
     public List<User> listarUsuarios(){
         return userService.getUsersList();
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public User buscarUsuario(@RequestParam String nit){return userService.getUser(nit);}
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("crear")
     public void crearUsuario(@RequestBody User user){
         userService.addUser(user);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping
     public void eliminarUsuario(@RequestParam String nit){
         userService.deleteUser(nit);
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping
     public void editarUsuario(@RequestBody User user){
         userService.updateUser(user);

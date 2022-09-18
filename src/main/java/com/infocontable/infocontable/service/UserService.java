@@ -17,7 +17,9 @@ public class UserService {
 
     public List<User> getUsersList() { return userRepository.findAll();}
 
-
+    public User getUser(String nit) {
+        return userRepository.buscarPorNit(nit);
+    }
     public void addUser(User user) {
         userRepository.save(user);
     }
@@ -31,12 +33,10 @@ public class UserService {
         User original = userRepository.findById(user.getNit()).orElseThrow(() -> new IllegalStateException("Student with id does not exist"));
         original.setNombre(user.getNombre());
         original.setApellido(user.getApellido());
-        original.setContraseña(user.getContraseña());
+        original.setContrasena(user.getContrasena());
         original.setEmpresa(user.getEmpresa());
-        original.setCodigo_auth(user.getCodigo_auth());
+//        original.setCodigo_auth(user.getCodigo_auth());
     }
 
-    public User getUser(String nit) {
-        return userRepository.buscarPorNit(nit);
-    }
+
 }

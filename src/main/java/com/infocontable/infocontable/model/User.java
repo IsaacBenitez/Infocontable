@@ -7,7 +7,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "TBL_USER")
+@Table(name = "usuarios")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -22,7 +22,7 @@ public class User {
     private String nit;
 
     @Column(nullable = false)
-    private String contraseña;
+    private String contrasena;
 
     @Column(nullable = false)
     private String nombre;
@@ -33,10 +33,10 @@ public class User {
     @Column(nullable = false)
     private String empresa;
 
-    @Column
-    private String codigo_auth;
+//    @Column
+//    private String codigo_auth;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<ReporteContable> reportesContables;
 
     @Column(nullable = false)
