@@ -4,23 +4,32 @@ import com.infocontable.infocontable.model.ReporteContable;
 import com.infocontable.infocontable.model.ReporteContableId;
 import com.infocontable.infocontable.model.User;
 import com.infocontable.infocontable.repository.ReporteContableRepository;
+import com.infocontable.infocontable.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReporteContableService {
 
     @Autowired
     private ReporteContableRepository reporteContableRepository;
+    @Autowired
+    private UserRepository userRepository;
+
+
     public List<ReporteContable> getReporteContableList() {return reporteContableRepository.findAll();
     }
 
     public ReporteContable getReporteContable(ReporteContableId reporteContableId) { return reporteContableRepository.buscarReporteContableId(reporteContableId);   }
 
-    public void addReporteContable(ReporteContable reporteContable) { reporteContableRepository.save(reporteContable);
+    public void addReporteContable(ReporteContable reporteContable) {
+        reporteContableRepository.save(reporteContable);
     }
 
     public void deleteReporteContable(ReporteContableId reporteContableId) { reporteContableRepository.deleteById(reporteContableId);

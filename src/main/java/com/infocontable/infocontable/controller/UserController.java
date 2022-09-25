@@ -16,29 +16,29 @@ public class UserController {
     private UserService userService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("listar")
+    @GetMapping("listarUsuarios")
     public List<User> listarUsuarios(){
         return userService.getUsersList();
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping
+    @GetMapping("buscarUsuario")
     public User buscarUsuario(@RequestParam String nit){return userService.getUser(nit);}
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("crear")
+    @PostMapping("crearUsuario")
     public void crearUsuario(@RequestBody User user){
         userService.addUser(user);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping
+    @DeleteMapping("eliminarUsuario")
     public void eliminarUsuario(@RequestParam String nit){
         userService.deleteUser(nit);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping
+    @PutMapping("editarUsuario")
     public void editarUsuario(@RequestBody User user){
         userService.updateUser(user);
     }

@@ -3,9 +3,12 @@ package com.infocontable.infocontable.controller;
 
 import com.infocontable.infocontable.model.ReporteContable;
 import com.infocontable.infocontable.model.ReporteContableId;
+import com.infocontable.infocontable.model.User;
+import com.infocontable.infocontable.repository.UserRepository;
 import com.infocontable.infocontable.service.ReporteContableService;
 import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,27 +20,32 @@ public class ReporteContableController {
     @Autowired
     private ReporteContableService reporteContableService;
 
-    @GetMapping("listar")
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("listarReportes")
     public List<ReporteContable> listarReportesContables(){return reporteContableService.getReporteContableList();}
 
-    @GetMapping
-    public ReporteContable buscarReporteContable(@RequestParam ReporteContableId reporteContableId){
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @GetMapping("buscarReporte")
+    public ReporteContable buscarReporteContable(@RequestBody ReporteContableId reporteContableId){
         return reporteContableService.getReporteContable(reporteContableId);
     }
 
-    @PostMapping
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PostMapping("crearReporte")
     public void crearReporteContable(@RequestBody ReporteContable reporteContable){
         reporteContableService.addReporteContable(reporteContable);
     }
 
-    @DeleteMapping
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @DeleteMapping("eliminarReporte")
     public void eliminarReporteContable(@RequestParam ReporteContableId reporteContableId){
         reporteContableService.deleteReporteContable(reporteContableId);
     }
 
-    @PutMapping
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PutMapping("editarReporte")
     public void editarReporteContable(@RequestBody ReporteContable reporteContable){
         reporteContableService.updateReporteContable(reporteContable);
     }
-    // TODO: PROBAR EL ENDPOINT DE EDITAR REPORTE CONTABLE
 }
