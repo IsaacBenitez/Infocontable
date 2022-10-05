@@ -60,7 +60,7 @@
                             <td th:text="${reporte.nombre_tercero}"></td>
                             <td th:text="${reporte.descripcion}"></td>
                             <td th:text="${reporte.comentarios}"></td>
-                            <td><a th:href="@{/api/reportes/eliminarReporte/{reporteContableId} (reporteContableId = ${reporte.reporteContableId})}">🗑️</a></td>
+<!--                            <td><a th:href="@{/api/reportes/eliminarReporte/{tipo}/{num}/{id} (tipo = ${reporte.reporteContableId.tipo_soporte}) (num = ${reporte.reporteContableId.num_soporte}) (id = ${reporte.reporteContableId.id_tercero})}" type="button" class="btn btn-danger">Eliminar</a></td>-->
                         </tr>
                         </tbody>
 

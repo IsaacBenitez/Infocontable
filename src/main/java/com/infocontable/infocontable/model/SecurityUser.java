@@ -30,6 +30,9 @@ public class SecurityUser implements UserDetails {
     public String getUserNit(){
         return user.getNit();
     }
+    public String fullName(){
+        return user.getNombre() + " " + user.getApellido();
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

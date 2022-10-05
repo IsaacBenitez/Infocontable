@@ -43,12 +43,13 @@ public class UserService {
         userRepository.deleteById(nit);}
 
     @Transactional
-    public void updateUser(User user) {
-        User original = userRepository.findById(user.getNit()).orElseThrow(() -> new IllegalStateException("El usuario que desea editar no existe"));
+    public void updateUser(String nit, User user) {
+        User original = userRepository.findById(nit).orElseThrow(() -> new IllegalStateException("El usuario que desea editar no existe"));
         original.setNombre(user.getNombre());
         original.setApellido(user.getApellido());
-        original.setContrasena(passwordEncoder.encode(user.getContrasena()));
         original.setEmpresa(user.getEmpresa());
+        original.setContrasena(passwordEncoder.encode(user.getContrasena()));
+
     }
 
 

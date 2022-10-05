@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<html xmlns:th="http://www.thymeleaf.org"></html>
+
 <head>
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+    <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
+
+
+
+
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,46 +44,36 @@
         <div class="container">
             <div class="row justify-content-center text-center">
                 <div id="body_container" class="col m-5">
-
-                    <table class="table table table-sm table-dark table-bordered">
-                        <thead>
-                        <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Apellido</th>
-                            <th scope="col">Nit</th>
-                            <th scope="col">Empresa</th>
-                            <th scope="col">Acciones</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr th:each="user : ${users}">
-                            <td th:text="${user.nombre}"></td>
-                            <td th:text="${user.apellido}"></td>
-                            <td th:text="${user.nit}"></td>
-                            <td th:text="${user.empresa}"></td>
-                            <td>
-                                <a th:href="@{/api/usuarios/editarUsuario/{nit} (nit = ${user.nit})}" type="button" class="btn btn-warning">Editar</a>
-                                <a th:href="@{/api/usuarios/eliminarUsuario/{nit} (nit = ${user.nit})}" type="button" class="btn btn-danger">Eliminar</a>
-                            </td>
-
-                        </tr>
-                        </tbody>
-
-                    </table>
-
                     <main class="form-signin w-50 m-auto">
                         <!--width 50 -->
                         <form>
-
+                            <img class="mb-4" src="/img/about2.jpg" alt="" width="72" height="57">
+                            <h1 id="textHeaderAndFooter" class="h3 mb-3 fw-normal text-light">Por favor seleccione la opcion deseada
+                            </h1>
                             <div class="container" id="colorexample">
-                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="registrarUsuario">Registrar cliente</a>
-
+                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" th:href="@{/api/usuarios/crearCliente_}">Crear cliente</a>
+                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" th:href="@{/api/usuarios/consultarListaClientes}">Consultar informacion cliente</a>
+                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" th:href="@{/api/usuarios/modificarClienteContador}">Modificar informacion cliente</a>
+                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" th:href="@{/api/usuarios/eliminarInfoClientes}">Eliminar informacion cliente</a>
                             </div>
 
 
                         </form>
                     </main>
                 </div>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div>
+                <form th:action="@{/logout}" method="post">
+                    <p>
+                        Bienvenido <b>[[${#request.userPrincipal.principal.fullName}]]</b>
+                    </p>
+                    <p>
+                        El Nit de su empresa es <b>[[${#request.userPrincipal.principal.getUserNit}]]</b>
+                    </p>
+                    <input type="submit" value="Sign Out" />
+                </form>
             </div>
         </div>
         <!-- Footer -->

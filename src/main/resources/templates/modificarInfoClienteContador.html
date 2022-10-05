@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-    
+
 <html xmlns:th="http://www.thymeleaf.org"></html>
 
 <head>
-
     <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
     <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+
 
 
     <meta charset="UTF-8">
@@ -32,7 +32,7 @@
     <!-- Navigation Bar -->
     <div class="breadcrumbs d-flex align-items-center">
         <div class="container position-relative d-flex flex-column align-items-center">
-            <h2 id="textHeaderAndFooter" class="text-light justify-content-center pb-3 mb-3">Consulta de clientes
+            <h2 id="textHeaderAndFooter" class="text-light justify-content-center pb-3 mb-3">Modificar informacion clientes
             </h2>
         </div>
     </div>
@@ -47,6 +47,7 @@
                     <th scope="col">NIT</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Rol</th>
+                    <th scope="col">Modificar cliente</th>
                 </tr>
             </thead>
             <tbody>
@@ -56,20 +57,18 @@
                     <td th:text="${user.nit}"></td>
                     <td th:text="${user.empresa}"></td>
                     <td th:text="${user.rol}" ></td>
+                    <td><a th:href="@{/api/usuarios/modificar/{nit} (nit = ${user.nit})}">Modificar cliente</a></td>
                 </tr>
-
-
-
             </tbody>
         </table>
 
     </div>
 
     <div class="container text-center" id="colorexample">
-        <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" th:href="@{/api/usuarios/principal}">Regresar
-            al menu principal contador</a>
-
+        <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" th:href="@{/api/usuarios/principal}">Regresar</a>
     </div>
+
+
 
     <!-- Footer -->
     <div id="footer_container">
