@@ -49,7 +49,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="reporte : ${reportes}" th:if="${reporte.user.nit} == ${#request.userPrincipal.principal.getUserNit}">
+                        <tr display:flex th:each="reporte : ${reportes}" th:if="${reporte.user.nit} == ${#request.userPrincipal.principal.getUserNit}">
                             <td th:text="${reporte.reporteContableId.tipo_soporte}"></td>
                             <td th:text="${reporte.reporteContableId.num_soporte}"></td>
                             <td th:text="${reporte.num_cuenta}"></td>
@@ -60,7 +60,10 @@
                             <td th:text="${reporte.nombre_tercero}"></td>
                             <td th:text="${reporte.descripcion}"></td>
                             <td th:text="${reporte.comentarios}"></td>
-<!--                            <td><a th:href="@{/api/reportes/eliminarReporte/{tipo}/{num}/{id} (tipo = ${reporte.reporteContableId.tipo_soporte}) (num = ${reporte.reporteContableId.num_soporte}) (id = ${reporte.reporteContableId.id_tercero})}" type="button" class="btn btn-danger">Eliminar</a></td>-->
+                            <td>
+                                <a th:href="@{/api/reportes/eliminarReporte/{tipo}/{num}/{id} (tipo = ${reporte.reporteContableId.tipo_soporte}, num = ${reporte.reporteContableId.num_soporte}, id = ${reporte.reporteContableId.id_tercero})}" type="button" class="btn btn-warning">Editar</a>
+                                <a th:href="@{/api/reportes/eliminarReporte/{tipo}/{num}/{id} (tipo = ${reporte.reporteContableId.tipo_soporte}, num = ${reporte.reporteContableId.num_soporte}, id = ${reporte.reporteContableId.id_tercero})}" type="button" class="btn btn-danger">Eliminar</a>
+                            </td>
                         </tr>
                         </tbody>
 

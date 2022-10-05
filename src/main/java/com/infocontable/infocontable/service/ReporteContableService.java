@@ -26,6 +26,7 @@ public class ReporteContableService {
     private UserRepository userRepository;
 
 
+
     public List<ReporteContable> getReporteContableList() {return reporteContableRepository.findAll();
     }
 
@@ -49,7 +50,9 @@ public class ReporteContableService {
         reporteContableRepository.save(reporteContable);
     }
 
-    public void deleteReporteContable(ReporteContableId reporteContableId) {
+    public void deleteReporteContable(String tipo_soporte, String num_soporte, String id_tercero) {
+
+        ReporteContableId reporteContableId = new ReporteContableId(tipo_soporte,num_soporte,id_tercero);
         boolean exists = reporteContableRepository.existsById(reporteContableId);
         if(!exists){
             throw new IllegalStateException("El reporte " + reporteContableId +" no existe");

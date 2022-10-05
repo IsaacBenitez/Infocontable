@@ -51,10 +51,10 @@ public class ReporteContableController {
 
     // TODO: ELIMINAR REPORTE Y ACTUALIZAR.
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @GetMapping("eliminarReporte/{reporteContableId}")
-    public String eliminarReporteContable(@PathVariable ("reporteContableId") ReporteContableId reporteContableId){
-        reporteContableService.deleteReporteContable(reporteContableId);
-        return "redirect:listarReportes";
+    @GetMapping("eliminarReporte/{tipo}/{num}/{id}")
+    public String eliminarReporteContable(@PathVariable("tipo") String tipo_soporte, @PathVariable("num") String num_soporte, @PathVariable("id") String id_tercero){
+        reporteContableService.deleteReporteContable(tipo_soporte,num_soporte,id_tercero);
+        return "redirect:/api/reportes/listarReportes";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
