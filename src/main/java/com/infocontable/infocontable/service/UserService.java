@@ -1,9 +1,12 @@
 package com.infocontable.infocontable.service;
 
+import com.infocontable.infocontable.config.Rol;
 import com.infocontable.infocontable.model.User;
 import com.infocontable.infocontable.repository.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 
@@ -17,6 +20,8 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<User> getUsersList() { return userRepository.findAll();}
 
@@ -24,8 +29,10 @@ public class UserService {
     public void addUser(User user) {
         Optional<User> userOptional = userRepository.findById(user.getNit());
         if(userOptional.isPresent()){
-            throw new IllegalStateException("Ya existe un usuario para este nit");
+            throw new IllegalStateException("Ya existe un usuario registrado para esta empresa");
         }
+        user.setContrasena(passwordEncoder.encode(user.getContrasena()));
+        user.setRol(Rol.USER);
         userRepository.save(user);}
 
     public void deleteUser(String nit) {
@@ -40,7 +47,7 @@ public class UserService {
         User original = userRepository.findById(user.getNit()).orElseThrow(() -> new IllegalStateException("El usuario que desea editar no existe"));
         original.setNombre(user.getNombre());
         original.setApellido(user.getApellido());
-        original.setContrasena(user.getContrasena());
+        original.setContrasena(passwordEncoder.encode(user.getContrasena()));
         original.setEmpresa(user.getEmpresa());
     }
 

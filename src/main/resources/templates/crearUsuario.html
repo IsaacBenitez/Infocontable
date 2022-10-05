@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+    <head>
+
+        <meta charset="UTF-8"> 
+
+        <title>InfoContable - Crear cliente</title>
+
+        <link rel="stylesheet" href="/css/styleCrearCliente.css">
+
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+
+    <body background="/img/about4.jpg">
+
+        <header class="caja">
+
+            <h1>Registrar usuario</h1>
+
+        </header>
+
+        <main>
+
+            <form th:action="@{/api/usuarios/crearUsuario}" method="post">
+
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" class="input-padron" th:field="${user.nombre}" required>
+
+                <label for="apellido">Apellido:</label>
+                <input type="text" id="apellido" class="input-padron" th:field="${user.apellido}" required>
+
+                <label for="empresa">Empresa:</label>
+                <input type="text" id="empresa" class="input-padron" th:field="${user.empresa}" required>
+
+                <label for="nit_cliente">NIT:</label>
+                <input type="text" id="nit_cliente" class="input-padron" th:field="${user.nit}" required>
+
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" class="input-padron" th:field="${user.contrasena}" required>
+
+                <div class="botones">
+
+                    <input type="submit" value="Crear cliente" class="enviar">
+
+                    <a href="menuPrincipalContador.html" class="regresar">Regresar al menú principal contador</a>
+
+                </div>
+
+            </form>
+
+
+
+        </main>
+
+    </body>
+
+    <footer>
+
+        <nav>
+
+            <a href="servicios.html">Servicios</a>
+
+            <a href="nosotros.html">Nosotros</a>
+
+        </nav>
+
+        <p class="pie">© 2022 Company, Inc</p>
+
+    </footer>
+
+</html>

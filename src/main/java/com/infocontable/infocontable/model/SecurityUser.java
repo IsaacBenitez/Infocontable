@@ -27,6 +27,10 @@ public class SecurityUser implements UserDetails {
         return user.getContrasena();
     }
 
+    public String getUserNit(){
+        return user.getNit();
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority("ROLE_"+user.getRol().toString()));

@@ -37,18 +37,23 @@
                     <table class="table table table-sm table-dark table-bordered">
                         <thead>
                         <tr>
-                            <th scope="col">Nit</th>
                             <th scope="col">Nombre</th>
                             <th scope="col">Apellido</th>
+                            <th scope="col">Nit</th>
                             <th scope="col">Empresa</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="usuario : ${usuarios}">
-                            <td th:text="${usuario.nit}"></td>
-                            <td th:text="${usuario.nombre}"></td>
-                            <td th:text="${usuario.apellido}"></td>
-                            <td th:text="${usuario.empresa}"></td>
+                        <tr th:each="user : ${users}">
+                            <td th:text="${user.nombre}"></td>
+                            <td th:text="${user.apellido}"></td>
+                            <td th:text="${user.nit}"></td>
+                            <td th:text="${user.empresa}"></td>
+                            <td>
+                                <a th:href="@{/api/usuarios/editarUsuario/{nit} (nit = ${user.nit})}" type="button" class="btn btn-warning">Editar</a>
+                                <a th:href="@{/api/usuarios/eliminarUsuario/{nit} (nit = ${user.nit})}" type="button" class="btn btn-danger">Eliminar</a>
+                            </td>
 
                         </tr>
                         </tbody>
@@ -60,12 +65,7 @@
                         <form>
 
                             <div class="container" id="colorexample">
-                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="/consultarReporteContador.html">Consultar reporte</a>
-                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="crearCliente.html">Crear cliente</a>
-                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="consultarClienteContador.html">Consultar informacion cliente</a>
-                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="/modificarInfoClienteContador.html">Modificar informacion cliente</a>
-                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="/eliminarClienteContador.html">Eliminar informacion cliente</a>
-                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="/cambiarContrasenaUsuario.html">Cambiar contrasena</a>
+                                <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="registrarUsuario">Registrar cliente</a>
 
                             </div>
 

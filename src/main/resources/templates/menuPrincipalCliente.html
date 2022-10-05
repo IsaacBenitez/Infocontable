@@ -45,10 +45,11 @@
                             <th scope="col">Nombre del tercero</th>
                             <th scope="col">Descripcion</th>
                             <th scope="col">Comentarios</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="reporte : ${reportes}">
+                        <tr th:each="reporte : ${reportes}" th:if="${reporte.user.nit} == ${#request.userPrincipal.principal.getUserNit}">
                             <td th:text="${reporte.reporteContableId.tipo_soporte}"></td>
                             <td th:text="${reporte.reporteContableId.num_soporte}"></td>
                             <td th:text="${reporte.num_cuenta}"></td>
@@ -59,6 +60,7 @@
                             <td th:text="${reporte.nombre_tercero}"></td>
                             <td th:text="${reporte.descripcion}"></td>
                             <td th:text="${reporte.comentarios}"></td>
+                            <td><a th:href="@{/api/reportes/eliminarReporte/{reporteContableId} (reporteContableId = ${reporte.reporteContableId})}">🗑️</a></td>
                         </tr>
                         </tbody>
 

@@ -36,11 +36,12 @@ public class ReporteContableController {
         return reporteContableService.getReporteContable(reporteContableId);
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @GetMapping("ingresarReporte")  //Dirige hacia el formulario para crear reporte contable.
     public String formIngresarReporte(ReporteContable reporteContable){
         return "crearReporteContable";
     }
+
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
     @PostMapping("crearReporte")    //Persiste la creacion del reporte contable.
     public String crearReporteContable(ReporteContable reporteContable){
@@ -48,11 +49,12 @@ public class ReporteContableController {
         return "redirect:listarReportes";
     }
 
-    //TODO: ELIMINAR REPORTE Y ACTUALIZAR.
+    // TODO: ELIMINAR REPORTE Y ACTUALIZAR.
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @DeleteMapping("eliminarReporte")
-    public void eliminarReporteContable(@RequestBody ReporteContableId reporteContableId){
+    @GetMapping("eliminarReporte/{reporteContableId}")
+    public String eliminarReporteContable(@PathVariable ("reporteContableId") ReporteContableId reporteContableId){
         reporteContableService.deleteReporteContable(reporteContableId);
+        return "redirect:listarReportes";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")

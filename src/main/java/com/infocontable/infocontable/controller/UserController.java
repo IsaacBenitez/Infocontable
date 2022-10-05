@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -22,30 +21,46 @@ public class UserController {
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("listarUsuarios")
     public String listarUsuarios(Model model){
-        model.addAttribute("usuarios", userService.getUsersList());
+        model.addAttribute("users", userService.getUsersList());
         return "menuPrincipalContador";
+    }
+
+    @GetMapping("registrarUsuario") // Dirige al formulario para registrar un usuario.
+    public String formRegistrarUsuario(User user){
+        return "crearUsuario";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("crearUsuario") // Registra un usuario
+    public String crearUsuario(User user){
+        userService.addUser(user);
+        return "redirect:listarUsuarios";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("buscarUsuario/{nit}")
     public Optional<User> buscarUsuario(@PathVariable("nit") String nit){return userService.getUser(nit);}
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("crearUsuario")
-    public void crearUsuario(@RequestBody User user){
-        userService.addUser(user);
-    }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @DeleteMapping("eliminarUsuario/{nit}")
-    public void eliminarUsuario(@PathVariable("nit") String nit) {
+    @GetMapping("eliminarUsuario/{nit}") // Elimina un usuario
+    public String eliminarUsuario(@PathVariable("nit") String nit) {
         userService.deleteUser(nit);
+        return "redirect:/api/usuarios/listarUsuarios";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PutMapping("editarUsuario")
-    public void editarUsuario(@RequestBody User user){
+    @GetMapping("editarUsuario/{nit}") // Dirige al formulario para editar un usuario.
+    public String editarUsuario(@PathVariable("nit") String nit, Model model){
+        model.addAttribute("user",userService.getUser(nit).get());
+        return "editarUsuario";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PostMapping("actualizarUsuario/{nit}") // Actualiza la informacion del usuario
+    public String actualizarUsuario(@PathVariable("nit") String nit, User user){
         userService.updateUser(user);
+        return "redirect:/api/usuarios/listarUsuarios";
     }
 
 }
