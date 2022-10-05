@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Load Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <link rel='stylesheet' type='text/css' media='screen' href='/css/main.css'>
+
+    <!-- Load Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src='/js/main.js'></script>
+</head>
+
+<body onload="setFooterContainer()" id="Fondo_Principal">
+    <!-- Navigation Bar -->
+    <div>
+        <div class="breadcrumbs d-flex align-items-center">
+            <div class="container position-relative d-flex flex-column align-items-center">
+                <h2 id="textHeaderAndFooter" class="text-light justify-content-center pb-3 mb-3">Menú Principal Cliente</h2>
+            </div>
+        </div>
+        <!-- Body -->
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div id="body_container" class="col m-5">
+                    <table class="table table table-sm table-dark table-bordered">
+                        <thead>
+                        <tr>
+                            <th scope="col">Tipo de soporte</th>
+                            <th scope="col">No. soporte</th>
+                            <th scope="col">No. cuenta</th>
+                            <th scope="col">Metodo de pago</th>
+                            <th scope="col">Valor Total</th>
+                            <th scope="col">Fecha</th>
+                            <th scope="col">Identificacion del tercero</th>
+                            <th scope="col">Nombre del tercero</th>
+                            <th scope="col">Descripcion</th>
+                            <th scope="col">Comentarios</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="reporte : ${reportes}">
+                            <td th:text="${reporte.reporteContableId.tipo_soporte}"></td>
+                            <td th:text="${reporte.reporteContableId.num_soporte}"></td>
+                            <td th:text="${reporte.num_cuenta}"></td>
+                            <td th:text="${reporte.metodo_pago}"></td>
+                            <td th:text="${reporte.valor}"></td>
+                            <td th:text="${reporte.fecha}"></td>
+                            <td th:text="${reporte.reporteContableId.id_tercero}"></td>
+                            <td th:text="${reporte.nombre_tercero}"></td>
+                            <td th:text="${reporte.descripcion}"></td>
+                            <td th:text="${reporte.comentarios}"></td>
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+                    <main class="form-signin w-50 m-auto">
+                        <!--width 50 -->
+
+                        <form>
+
+                            <div class="container" id="colorexample">
+                                <a class="btn btn-primary btn-lg btn-block col-6 m-3" href="ingresarReporte">Ingresar reporte contable</a>
+                            </div>
+
+                        </form>
+                    </main>
+                </div>
+            </div>
+        </div>
+        <!-- Footer -->
+        <div id="footer_container">
+
+        </div>
+
+
+
+</body>
+
+</html>

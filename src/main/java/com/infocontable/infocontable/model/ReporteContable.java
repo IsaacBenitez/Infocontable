@@ -2,13 +2,18 @@ package com.infocontable.infocontable.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "reportescontables")
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 @ToString
 @EqualsAndHashCode
 public class ReporteContable {
@@ -29,6 +34,7 @@ public class ReporteContable {
     private String descripcion;
 
     @Column
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fecha;
 
     @Column
@@ -38,80 +44,8 @@ public class ReporteContable {
     private String nombre_tercero;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "user_nit")
     private User user;
 
-
-    public ReporteContableId getReporteContableId() {
-        return reporteContableId;
-    }
-
-    public void setReporteContableId(ReporteContableId reporteContableId) {
-        this.reporteContableId = reporteContableId;
-    }
-
-    public String getNum_cuenta() {
-        return num_cuenta;
-    }
-
-    public void setNum_cuenta(String num_cuenta) {
-        this.num_cuenta = num_cuenta;
-    }
-
-    public String getMetodo_pago() {
-        return metodo_pago;
-    }
-
-    public void setMetodo_pago(String metodo_pago) {
-        this.metodo_pago = metodo_pago;
-    }
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public LocalDate getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
-
-    public String getComentarios() {
-        return comentarios;
-    }
-
-    public void setComentarios(String comentarios) {
-        this.comentarios = comentarios;
-    }
-
-    public String getNombre_tercero() {
-        return nombre_tercero;
-    }
-
-    public void setNombre_tercero(String nombre_tercero) {
-        this.nombre_tercero = nombre_tercero;
-    }
-
-    @JsonBackReference
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }
