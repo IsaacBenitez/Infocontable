@@ -1,6 +1,8 @@
 package com.infocontable.infocontable.controller;
 
+import com.infocontable.infocontable.model.ReporteContable;
 import com.infocontable.infocontable.model.User;
+import com.infocontable.infocontable.service.ReporteContableService;
 import com.infocontable.infocontable.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +19,9 @@ public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ReporteContableService reporteContableService;
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("principal")
@@ -85,6 +90,23 @@ public class UserController {
     public String processUpdate(@PathVariable("nit") String nit, User user) {
         userService.updateUser(nit,user);
         return "redirect:/api/usuarios/modificarClienteContador";
+
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("consultarClientes") //Muestra los clientes y la opcion de consultar sus registros
+    public String verConsultaUsuario(Model model){
+        List<User> listUsers = userService.getUsersList();
+        model.addAttribute("listUsers", listUsers);
+        return "consultarReporteContador";
+    }
+
+    @PreAuthorize("hasRole('ADMIN')") //Muestra los registros del cliente por nit
+    @GetMapping("consultarReportesCliente/{nit}")
+    public String verReportesCliente(@PathVariable("nit") String nit, Model model){
+        model.addAttribute("reportes", reporteContableService.getReporteContableList());
+        model.addAttribute("user", userService.getUser(nit).get());
+        return "verRegistrosCliente";
 
     }
 

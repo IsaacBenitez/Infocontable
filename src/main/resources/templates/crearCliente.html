@@ -14,7 +14,8 @@
 
         <meta charset="UTF-8"> 
 
-        <title>InfoContable - Crear cliente</title>
+        <title>InfoContable</title>
+        <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2287/2287003.png" type="image/gif">
 
 
         <!-- Load Styles -->
@@ -33,6 +34,20 @@
     </head>
 
     <body onload="setFooterContainer()" id="Fondo_Principal">
+    <div class="container-fluid">
+        <!-- Navigation Bar -->
+        <nav class="navbar navbar-expand navbar-dark bg-dark border-3 border-bottom" >
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/api/reportes/listarReportes}">
+                    <img src="https://cdn-icons-png.flaticon.com/512/2287/2287003.png" width="50" alt="" loading="lazy">
+                    <strong>Infocontable</strong>
+                </a>
+                <div class="btn-nav">
+                    <a class="btn btn-primary btn-small navbar-btn" th:href="@{/logout}">Cerrar sesión</a>
+                </div>
+            </div>
+        </nav>
+    </div>
 
         <header class="caja">
 
