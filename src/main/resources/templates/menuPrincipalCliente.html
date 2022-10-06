@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Infocontable</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2287/2287003.png" type="image/gif">
 
     <!-- Load Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -21,11 +22,29 @@
 </head>
 
 <body onload="setFooterContainer()" id="Fondo_Principal">
+<div class="container-fluid">
     <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark border-3 border-bottom" >
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/api/reportes/listarReportes}">
+                <img src="https://cdn-icons-png.flaticon.com/512/2287/2287003.png" width="50" alt="" loading="lazy">
+                <strong>Infocontable</strong>
+            </a>
+            <div class="btn-nav">
+                <a class="btn btn-primary btn-small navbar-btn" th:href="@{/logout}">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
     <div>
         <div class="breadcrumbs d-flex align-items-center">
             <div class="container position-relative d-flex flex-column align-items-center">
-                <h2 id="textHeaderAndFooter" class="text-light justify-content-center pb-3 mb-3">Menú Principal Cliente</h2>
+                <h2 id="textHeaderAndFooter" class="text-light justify-content-center pb-3 mb-3">Mis Registros Contables</h2>
+            </div>
+        </div>
+        <div class="container text-center">
+            <div class="container position-relative d-flex flex-column align-items-center">
+                <h1 id="textHeaderAndFooter" class="h3 mb-3 fw-normal text-light">Bienvenido <b>[[${#request.userPrincipal.principal.fullName}]]</b></h1>
             </div>
         </div>
         <!-- Body -->
@@ -92,6 +111,7 @@
         </main>
 
     </div>
+
     <!-- Footer -->
     <div id="footer_container"></div>
 </body>

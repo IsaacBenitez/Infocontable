@@ -12,6 +12,13 @@ label.form{
   color: aliceblue;
 }
 
+.btn.btn-primary.btn-small.navbar-btn{
+  background-color: rgb(72, 67, 104);
+  border-color: rgb(72, 67, 104);
+}
+.border-bottom{
+  border-color:rgb(72 67 104)!important;
+}
 
 #Fondo_Secundario{
   background-image:  url('../img/about3.jpg');

@@ -14,7 +14,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Infocontable</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/2287/2287003.png" type="image/gif">
 
     <!-- Load Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -30,17 +31,29 @@
 </head>
 
 <body onload="setFooterContainer()" id="Fondo_Principal">
+<div class="container-fluid">
     <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand navbar-dark bg-dark border-3 border-bottom" >
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/api/reportes/listarReportes}">
+                <img src="https://cdn-icons-png.flaticon.com/512/2287/2287003.png" width="50" alt="" loading="lazy">
+                <strong>Infocontable</strong>
+            </a>
+            <div class="btn-nav">
+                <a class="btn btn-primary btn-small navbar-btn" th:href="@{/logout}">Cerrar sesión</a>
+            </div>
+        </div>
+    </nav>
+</div>
     <div class="breadcrumbs d-flex align-items-center">
         <div class="container position-relative d-flex flex-column align-items-center">
-            <h2 id="textHeaderAndFooter" class="text-light justify-content-center pb-3 mb-3">Eliminar informacion clientes
+            <h2 id="textHeaderAndFooter" class="text-light justify-content-center pb-3 mb-3">Eliminar cuenta cliente
             </h2>
         </div>
     </div>
     <!-- Body -->
     <div>
-    
-        
+
             <table class="table table table-sm table-dark table-bordered">
                 
                     <tr>
@@ -59,7 +72,9 @@
                         <td th:text="${user.nit}"></td>
                         <td th:text="${user.empresa}"></td>
                         <td th:text="${user.rol}" ></td>
-                        <td><a th:href="@{/api/usuarios/process_delete/{nit} (nit = ${user.nit})}">Eliminar cliente</a></td>
+                        <td><a th:href="@{/api/usuarios/process_delete/{nit} (nit = ${user.nit})}"
+                               onclick="return confirm('Estas seguro de querer eliminar la cuenta de este cliente?');"
+                               type="button" class="btn btn-danger">Eliminar</a></td>
                     </tr>
 
             </table>
