@@ -34,7 +34,7 @@ public class WebSecurityConfig {
         return http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**","/css/*","/js/*","/img/*").permitAll()
+                .antMatchers("/css/*","/js/*","/img/*").permitAll()
 //                .anyRequest().authenticated()
                 .and()
                 .userDetailsService(jpaUserDetailsService)

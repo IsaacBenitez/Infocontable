@@ -40,53 +40,62 @@
       <div class="row">
 
         <div class="col-md-4 mb-3">
-          <label for="tipo_soporte" >Tipo de soporte</label>
-          <input type="text" class="form-control" id="tipo_soporte" th:field="${reporteContable.reporteContableId.tipo_soporte}" placeholder="Tipo de soporte" >
+          <label class="form" for="tipo_soporte" >Tipo de soporte</label>
+          <select th:field="${reporteContable.reporteContableId.tipo_soporte}" class="form-control w-100" id="tipo_soporte" required>
+            <option value="Recibo de caja">Recibo de caja</option>
+            <option value="Cheque">Cheque</option>
+            <option value="Factura de compra-venta">Factura de compra-venta</option>
+            <option value="Letra de cambio">Letra de cambio</option>
+            <option value="Pagaré">Pagaré</option>
+            <option value="Nota Débito">Nota Débito</option>
+            <option value="Nota Crédito">Nota Crédito</option>
+          </select>
+<!--          <input type="text" class="form-control" id="tipo_soporte" th:field="${reporteContable.reporteContableId.tipo_soporte}" placeholder="Tipo de soporte" required>-->
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="num_soporte" >No. soporte</label>
-          <input type="text" class="form-control" id="num_soporte" th:field="${reporteContable.reporteContableId.num_soporte}" placeholder="No. Soporte" >
+          <label class="form" for="num_soporte" >No. soporte</label>
+          <input type="text" class="form-control" id="num_soporte" th:field="${reporteContable.reporteContableId.num_soporte}" placeholder="No. Soporte" required>
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="num_cuenta" >No. cuenta</label>
-          <input type="text" class="form-control" id="num_cuenta" th:field="${reporteContable.num_cuenta}" placeholder="No. Cuenta" >
+          <label class="form" for="num_cuenta" >No. cuenta</label>
+          <input type="text" class="form-control" id="num_cuenta" th:field="${reporteContable.num_cuenta}" placeholder="No. Cuenta" required>
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="metodo_pago" >Metodo de pago</label>
-          <input type="text" class="form-control" id="metodo_pago" th:field="${reporteContable.metodo_pago}" placeholder="Metodo de pago" >
+          <label class="form" for="metodo_pago" >Metodo de pago</label>
+          <input type="text" class="form-control" id="metodo_pago" th:field="${reporteContable.metodo_pago}" placeholder="Metodo de pago" required>
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="valor" >Valor Total</label>
-          <input type="number" class="form-control" id="valor" th:field="${reporteContable.valor}" placeholder="Valor Total" >
+          <label class="form" for="valor" >Valor Total</label>
+          <input type="number" class="form-control" id="valor" th:field="${reporteContable.valor}" placeholder="Valor Total" required>
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="fecha" >Fecha</label>
-          <input type="date" class="form-control" id="fecha" th:field="${reporteContable.fecha}" placeholder="Fecha" >
+          <label class="form" for="fecha" >Fecha</label>
+          <input type="date" class="form-control" id="fecha" th:field="${reporteContable.fecha}" placeholder="Fecha" required>
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="id_tercero" >Identificacion del tercero</label>
-          <input type="text" class="form-control" id="id_tercero" th:field="${reporteContable.reporteContableId.id_tercero}" placeholder="Identificacion del tercero" >
+          <label class="form" for="id_tercero" >Identificacion del tercero</label>
+          <input type="text" class="form-control" id="id_tercero" th:field="${reporteContable.reporteContableId.id_tercero}" placeholder="Identificacion del tercero" required>
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="nombre_tercero" >Nombre del tercero</label>
-          <input type="text" class="form-control" id="nombre_tercero" th:field="${reporteContable.nombre_tercero}" placeholder="Nombre del tercero" >
+          <label class="form" for="nombre_tercero" >Nombre del tercero</label>
+          <input type="text" class="form-control" id="nombre_tercero" th:field="${reporteContable.nombre_tercero}" placeholder="Nombre del tercero" required>
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="descripcion" >Descripcion</label>
-          <input type="text" class="form-control" id="descripcion" th:field="${reporteContable.descripcion}" placeholder="Descripcion" >
+          <label class="form" for="descripcion" >Descripcion</label>
+          <input type="text" class="form-control" id="descripcion" th:field="${reporteContable.descripcion}" placeholder="Descripcion" required>
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="comentarios" >Comentarios</label>
-          <input type="text" class="form-control" id="comentarios" th:field="${reporteContable.comentarios}" placeholder="Comentarios" >
+          <label class="form" for="comentarios" >Comentarios</label>
+          <input type="text" class="form-control" id="comentarios" th:field="${reporteContable.comentarios}" placeholder="Comentarios" required>
         </div>
 
 
@@ -94,7 +103,7 @@
 
       <div class="container text-center" id="colorexample">
         <input type="submit" class="btn btn-primary btn-lg btn-block col-6 m-3" value="Guardar">
-        <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" href="/menuPrincipalCliente.html">Regresar</a>
+        <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" th:href="@{/api/reportes/listarReportes}">Regresar</a>
       </div>
 
     </form>

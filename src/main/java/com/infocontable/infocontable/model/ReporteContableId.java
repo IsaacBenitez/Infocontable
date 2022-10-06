@@ -2,6 +2,7 @@ package com.infocontable.infocontable.model;
 
 
 import lombok.*;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -13,8 +14,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @Getter
 @Setter
+@Component
 public class ReporteContableId implements Serializable {
-
 
     private String tipo_soporte;
     private String num_soporte;

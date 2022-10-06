@@ -7,6 +7,12 @@
 
 }
 
+label.form{
+  font-family: Arial, Helvetica, sans-serif;
+  color: aliceblue;
+}
+
+
 #Fondo_Secundario{
   background-image:  url('../img/about3.jpg');
 
@@ -15,6 +21,12 @@
 #textHeaderAndFooter{
   color: lightcyan !important;
 
+}
+
+#tbreportes th,td
+{
+  text-align: center;
+  vertical-align: middle;
 }
 
 .btn-primary.btn-lg.btn-block.col-6.m-3, .btn.btn-primary.btn-lg.btn-block.col-4.mb-3{
@@ -32,7 +44,7 @@
 }
 
 .table.table-sm.table-dark{
-border-color: rgb(131, 66, 80);
+border-color: rgb(72, 67, 104);
 }
 
 table td {
@@ -41,5 +53,5 @@ table td {
 }
 
 table th{
-  color: rgb(107, 119, 224);
+  color: rgb(255, 255, 255);
 }

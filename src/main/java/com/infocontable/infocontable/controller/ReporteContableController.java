@@ -2,11 +2,7 @@ package com.infocontable.infocontable.controller;
 
 
 import com.infocontable.infocontable.model.ReporteContable;
-import com.infocontable.infocontable.model.ReporteContableId;
-import com.infocontable.infocontable.model.User;
-import com.infocontable.infocontable.repository.UserRepository;
 import com.infocontable.infocontable.service.ReporteContableService;
-import com.sun.xml.bind.v2.TODO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -31,9 +27,9 @@ public class ReporteContableController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @GetMapping("buscarReporte")
-    public ReporteContable buscarReporteContable(@RequestBody ReporteContableId reporteContableId){
-        return reporteContableService.getReporteContable(reporteContableId);
+    @GetMapping("buscarReporte/{tipo}/{num}/{id}")
+    public ReporteContable buscarReporteContable(@PathVariable("tipo") String tipo_soporte, @PathVariable("num") String num_soporte, @PathVariable("id") String id_tercero){
+        return reporteContableService.getReporteContable(tipo_soporte,num_soporte,id_tercero);
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
@@ -51,15 +47,28 @@ public class ReporteContableController {
 
     // TODO: ELIMINAR REPORTE Y ACTUALIZAR.
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @GetMapping("eliminarReporte/{tipo}/{num}/{id}")
+    @GetMapping("eliminarReporte/{tipo}/{num}/{id}") //Elimina un reporte contable por su ID.
     public String eliminarReporteContable(@PathVariable("tipo") String tipo_soporte, @PathVariable("num") String num_soporte, @PathVariable("id") String id_tercero){
+//        ReporteContableId reporteContableId = new ReporteContableId(tipo_soporte,num_soporte,id_tercero);
         reporteContableService.deleteReporteContable(tipo_soporte,num_soporte,id_tercero);
         return "redirect:/api/reportes/listarReportes";
     }
 
     @PreAuthorize("hasAnyRole('ADMIN','USER')")
-    @PutMapping("editarReporte")
-    public void editarReporteContable(@RequestBody ReporteContable reporteContable){
-        reporteContableService.updateReporteContable(reporteContable);
+    @GetMapping("editarReporte/{tipo}/{num}/{id}")
+    public String editarReporteContable(@PathVariable("tipo") String tipo_soporte, @PathVariable("num") String num_soporte, @PathVariable("id") String id_tercero, Model model){
+//        ReporteContableId reporteContableId = new ReporteContableId(tipo_soporte,num_soporte,id_tercero);
+
+        model.addAttribute("reporte", reporteContableService.getReporteContable(tipo_soporte,num_soporte,id_tercero));
+        return "modificarReporteUsuario";
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN','USER')")
+    @PostMapping("actualizarReporte/{tipo}/{num}/{id}")
+    public String actualizarReporteContable(@PathVariable("tipo") String tipo_soporte, @PathVariable("num") String num_soporte, @PathVariable("id") String id_tercero, ReporteContable reporteContable){
+//        ReporteContableId reporteContableId = new ReporteContableId(tipo_soporte,num_soporte,id_tercero);
+
+        reporteContableService.updateReporteContable(tipo_soporte,num_soporte,id_tercero, reporteContable);
+        return "redirect:/api/reportes/listarReportes";
     }
 }

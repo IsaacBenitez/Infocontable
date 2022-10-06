@@ -4,10 +4,8 @@ import com.infocontable.infocontable.model.User;
 import com.infocontable.infocontable.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,23 +57,23 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("process_delete/{nit}")
-    private String processDelete(@PathVariable("nit") String nit) {
+    public String processDelete(@PathVariable("nit") String nit) {
         userService.deleteUser(nit);
         return "redirect:/api/usuarios/eliminarInfoClientes";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("modificarClienteContador")
-    private String verUsuarios(Model model) {
-        model.addAttribute("listUsers", userService.getUsersList());
-
+    public String verUsuarios(Model model) {
+        List<User> listUsers = userService.getUsersList();
+        model.addAttribute("listUsers", listUsers);
         return "modificarInfoClienteContador";
 
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/modificar/{nit}")
-    private String verUsuarioPorNit(@PathVariable("nit") String nit, Model model) {
+    public String verUsuarioPorNit(@PathVariable("nit") String nit, Model model) {
         User user = userService.getUser(nit).get();
         model.addAttribute("user", user);
 
@@ -84,7 +82,7 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("process_update/{nit}")
-    private String processUpdate(@PathVariable("nit") String nit, User user) {
+    public String processUpdate(@PathVariable("nit") String nit, User user) {
         userService.updateUser(nit,user);
         return "redirect:/api/usuarios/modificarClienteContador";
 

@@ -9,6 +9,7 @@ import com.infocontable.infocontable.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 
@@ -25,12 +26,18 @@ public class ReporteContableService {
     @Autowired
     private UserRepository userRepository;
 
-
+    @Autowired
+    private ReporteContableId reporteContableId;
 
     public List<ReporteContable> getReporteContableList() {return reporteContableRepository.findAll();
     }
 
-    public ReporteContable getReporteContable(ReporteContableId reporteContableId) { return reporteContableRepository.buscarReporteContableId(reporteContableId);   }
+    public ReporteContable getReporteContable(String tipo_soporte, String num_soporte, String id_tercero) {
+        reporteContableId.setTipo_soporte(tipo_soporte);
+        reporteContableId.setNum_soporte(num_soporte);
+        reporteContableId.setId_tercero(id_tercero);
+        return reporteContableRepository.buscarReporteContableId(reporteContableId);
+    }
 
     public void addReporteContable(ReporteContable reporteContable) {
         Optional<ReporteContable> rcOptional = reporteContableRepository.findById(reporteContable.getReporteContableId());
@@ -51,8 +58,9 @@ public class ReporteContableService {
     }
 
     public void deleteReporteContable(String tipo_soporte, String num_soporte, String id_tercero) {
-
-        ReporteContableId reporteContableId = new ReporteContableId(tipo_soporte,num_soporte,id_tercero);
+        reporteContableId.setTipo_soporte(tipo_soporte);
+        reporteContableId.setNum_soporte(num_soporte);
+        reporteContableId.setId_tercero(id_tercero);
         boolean exists = reporteContableRepository.existsById(reporteContableId);
         if(!exists){
             throw new IllegalStateException("El reporte " + reporteContableId +" no existe");
@@ -60,14 +68,13 @@ public class ReporteContableService {
         reporteContableRepository.deleteById(reporteContableId);
     }
     @Transactional
-    public void updateReporteContable(ReporteContable reporteContable) {
-        ReporteContable original = reporteContableRepository.findById(reporteContable.getReporteContableId()).orElseThrow(() -> new IllegalStateException("El reporte contable que desea editar no existe"));
-        original.setNum_cuenta(reporteContable.getNum_cuenta());
-        original.setMetodo_pago(reporteContable.getMetodo_pago());
-        original.setValor(reporteContable.getValor());
-        original.setDescripcion(reporteContable.getDescripcion());
-        original.setFecha(reporteContable.getFecha());
-        original.setComentarios(reporteContable.getComentarios());
-        original.setNombre_tercero(reporteContable.getNombre_tercero());
+    public void updateReporteContable(String tipo_soporte, String num_soporte, String id_tercero, ReporteContable reporteContable) {
+        reporteContableId.setTipo_soporte(tipo_soporte);
+        reporteContableId.setNum_soporte(num_soporte);
+        reporteContableId.setId_tercero(id_tercero);
+        reporteContableRepository.deleteById(reporteContableId);
+        addReporteContable(reporteContable);
+
+
     }
 }
