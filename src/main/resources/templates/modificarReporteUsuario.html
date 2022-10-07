@@ -75,7 +75,7 @@
         </div>
 
         <div class="col-md-4 mb-3">
-          <label class="form" for="metodo_pago" >Metodo de pago</label>
+          <label class="form" for="metodo_pago" >Método de pago</label>
           <select th:field="${reporte.metodo_pago}" class="form-control w-100" id="metodo_pago" required>
             <option value="Efectivo">Efectivo</option>
             <option value="Tarjeta de crédito">Tarjeta de crédito</option>
@@ -96,7 +96,7 @@
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="id_tercero" >Identificacion del tercero</label>
+          <label for="id_tercero" >Identificación del tercero</label>
           <input type="text" class="form-control" id="id_tercero" th:field="${reporte.reporteContableId.id_tercero}" placeholder="Identificacion del tercero" required>
         </div>
 
@@ -106,7 +106,7 @@
         </div>
 
         <div class="col-md-4 mb-3">
-          <label for="descripcion" >Descripcion</label>
+          <label for="descripcion" >Descripción</label>
           <input type="text" class="form-control" id="descripcion" th:field="${reporte.descripcion}" placeholder="Descripcion" required>
         </div>
 
@@ -119,7 +119,7 @@
 
       <div class="container text-center" id="colorexample">
 
-        <input type="submit" value="Actualizar registro" class="btn btn-primary btn-lg btn-block col-6 m-3">
+        <input type="submit" value="Actualizar" class="btn btn-primary btn-lg btn-block col-6 m-3">
         <a type="button" class="btn btn-primary btn-lg btn-block col-6 m-3" th:href="@{/api/reportes/listarReportes}">Regresar</a>
 
       </div>
