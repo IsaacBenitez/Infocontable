@@ -1,7 +1,7 @@
 package com.infocontable.infocontable.controller;
 
-import com.infocontable.infocontable.model.ReporteContable;
 import com.infocontable.infocontable.model.User;
+import com.infocontable.infocontable.repository.ReporteContableRepository;
 import com.infocontable.infocontable.service.ReporteContableService;
 import com.infocontable.infocontable.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/usuarios")
@@ -24,81 +24,49 @@ public class UserController {
     private ReporteContableService reporteContableService;
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("principal")
-    public String viewHomePage(){
+    @GetMapping("listarUsuarios") // Lista todos los usuarios
+    public String listarUsuarios(Model model){
+        model.addAttribute("users", userService.getUsersList());
         return "menuPrincipalContador";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("crearCliente_")
-    public String MostrarcrearCliente(User user) {
-
-        return "crearCliente";
+    @GetMapping("registrarUsuario") // Dirige al formulario para registrar un usuario.
+    public String formRegistrarUsuario(User user){
+        return "crearUsuario";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("process_register")
-    public String processRegistration(User user) {
+    @PostMapping("crearUsuario") // Registra un usuario
+    public String crearUsuario(User user){
         userService.addUser(user);
-
-        return "redirect:/api/usuarios/crearCliente_";
+        return "redirect:listarUsuarios";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("consultarListaClientes")
-    public String verListaUsuarios(Model model) {
-        List<User> listUsers = userService.getUsersList();
-        model.addAttribute("listUsers", listUsers);
-        return "consultarClienteContador";
-    }
+    @GetMapping("buscarUsuario/{nit}")
+    public Optional<User> buscarUsuario(@PathVariable("nit") String nit){return userService.getUser(nit);}
+
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("eliminarInfoClientes")  //
-    public String verEliminarUsuarios(Model model) {
-        List<User> listUsers = userService.getUsersList();
-        model.addAttribute("listUsers", listUsers);
-        return "eliminarClienteContador";
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("process_delete/{nit}")
-    public String processDelete(@PathVariable("nit") String nit) {
+    @GetMapping("eliminarUsuario/{nit}") // Elimina un usuario
+    public String eliminarUsuario(@PathVariable("nit") String nit) {
         userService.deleteUser(nit);
-        return "redirect:/api/usuarios/eliminarInfoClientes";
+        return "redirect:/api/usuarios/listarUsuarios";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("modificarClienteContador")
-    public String verUsuarios(Model model) {
-        List<User> listUsers = userService.getUsersList();
-        model.addAttribute("listUsers", listUsers);
-        return "modificarInfoClienteContador";
-
+    @GetMapping("editarUsuario/{nit}") // Dirige al formulario para editar un usuario.
+    public String editarUsuario(@PathVariable("nit") String nit, Model model){
+        model.addAttribute("user",userService.getUser(nit).get());
+        return "editarUsuario";
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/modificar/{nit}")
-    public String verUsuarioPorNit(@PathVariable("nit") String nit, Model model) {
-        User user = userService.getUser(nit).get();
-        model.addAttribute("user", user);
-
-        return "procesoModificacionContador";
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @PostMapping("process_update/{nit}")
-    public String processUpdate(@PathVariable("nit") String nit, User user) {
+    @PostMapping("actualizarUsuario/{nit}") // Actualiza la informacion del usuario
+    public String actualizarUsuario(@PathVariable("nit") String nit, User user){
         userService.updateUser(nit,user);
-        return "redirect:/api/usuarios/modificarClienteContador";
-
-    }
-
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("consultarClientes") //Muestra los clientes y la opcion de consultar sus registros
-    public String verConsultaUsuario(Model model){
-        List<User> listUsers = userService.getUsersList();
-        model.addAttribute("listUsers", listUsers);
-        return "consultarReporteContador";
+        return "redirect:/api/usuarios/listarUsuarios";
     }
 
     @PreAuthorize("hasRole('ADMIN')") //Muestra los registros del cliente por nit
@@ -109,6 +77,4 @@ public class UserController {
         return "verRegistrosCliente";
 
     }
-
-
 }

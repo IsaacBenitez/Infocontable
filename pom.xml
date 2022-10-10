@@ -70,7 +70,7 @@
                 <version>3.0.4</version>
                 <configuration>
                     <appName>fathomless-island-62817</appName>
-                    <includeTarget>false</includeTarget>
+                    <includeTarget>false</includeTarget>gi
                     <includes>
                         <include>${project.build.directory}/${project.build.finalName}.jar</include>
                     </includes>
